@@ -45,7 +45,7 @@ cible.setFirstName( formatString ( source.getFirstName(), 0, 20 ));
 
 //toString...
 //toHTML... 
-```java
+```
 
 # Tips
 * Once mapAToB() called, put the Java part of the result in your final mapping Class
