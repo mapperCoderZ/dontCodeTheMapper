@@ -13,7 +13,7 @@ I've made this program in one day, it has been made with the StringSimilarity.ja
 
 # Why ?
 I use to map JAXB annotated types one to anothers, all days, at work. We spend 90% of our time writing java mappers for our clients to integrate new web services based on XML. Since we use CXF and JAXB code generation from XSD, it's possible to automate the writing of 50% of our mappers, at least for fields that are similar by their name/type/attributes...
-According to your data model, this little program writes 50% of the mapping code for you, sometimes more! Take a look at the report to state on the quality of the generated report :
+According to your data model, this little program writes 50% of the mapping code for you, sometimes more! Take a look at the report to state on the quality of the generated code :
 ![alt text](https://github.com/gillesofraisse/dontCodeTheMapper/blob/master/generator/htmlReport.png "Sample")
 
 # Use
