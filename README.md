@@ -1,5 +1,5 @@
 # Don't code the mapper! 
-This program is an utility that writes the java mapping code between 2 types code for you. It's designed to work with JAXB annotated types.
+This program is an utility that writes the java mapping code between 2 types for you. It's designed to work with JAXB annotated types.
 - you do not want anymore to write if (null) then else
 - you want to generate the code that maps basic fields without touching the keyboard
 - you want to keep control on the code
