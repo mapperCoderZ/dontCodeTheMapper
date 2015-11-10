@@ -1,0 +1,45 @@
+//creates...
+AccountPeople account1Dest = new AccountPeople();
+cible.setAccount( account1Dest );
+DataInfos profileInfos1Dest = new DataInfos();
+account1Dest.setProfileInfos( profileInfos1Dest );
+FacebookInfos facebook1Dest = new FacebookInfos();
+account1Dest.setFacebook( facebook1Dest );
+DataInfos profileInfos2Dest = new DataInfos();
+cible.setProfileInfos( profileInfos2Dest );
+
+//sets...
+cible.setId( source.getId());
+Account account1Source = source.getAccount();
+if ( account1Source != null ){
+account1Dest.setLogin( account1Source.getLogin());
+account1Dest.setIsAdmin( formatString ( account1Source.getLogin(), 1, 1 ));
+account1Dest.setPassword( account1Source.getPassword());
+}
+cible.setFirstName( formatString ( source.getFirstName(), 0, 20 ));
+cible.setLastName( source.getLastName());
+cible.setNickname( formatString ( source.getNickname(), 8, 10 ));
+// pay attention here, the mapping is possibly wrong because type is not String nor boolean !
+cible.setMail( formatMe ( source.getEmail() ));
+
+//unsets...
+//profileInfos1Dest.setCreation( new XMLGregorianCalendar() );
+//profileInfos1Dest.setModification( new XMLGregorianCalendar() );
+//facebook1Dest.setCompteFacebookName( "MANDATORY " );
+//facebook1Dest.setMotDePasse( "MANDATORY " );
+//profileInfos2Dest.setCreation( new XMLGregorianCalendar() );
+//profileInfos2Dest.setModification( new XMLGregorianCalendar() );
+
+//toString...
+id[ String, MANDATORY ] <=> id[ String, MANDATORY ] ( 100% )
+account[ AccountPeople ] <=> ? account.login[ String, MANDATORY ] <=> account.login[ String, MANDATORY ] ( 100% )
+ account.password[ String ] <=> account.password[ String, MANDATORY ] ( 80% )
+ account.isAdmin[ String, MANDATORY, minLength=1, maxLength=1 ] <=> account.login[ String, MANDATORY ] ( 66% )
+ account.profileInfos[ DataInfos, MANDATORY ] <=> ? profileInfos.creation[ XMLGregorianCalendar ] <=> ? profileInfos.modification[ XMLGregorianCalendar ] <=> ? account.facebook[ FacebookInfos, MANDATORY ] <=> ? facebook.compteFacebookName[ String, MANDATORY ] <=> ? facebook.motDePasse[ String, MANDATORY ] <=> ?firstName[ String, MANDATORY, minLength=0, maxLength=20 ] <=> firstName[ String, MANDATORY, minLength=0, maxLength=120 ] ( 100% )
+lastName[ String, MANDATORY, minLength=0, maxLength=20 ] <=> lastName[ String, MANDATORY ] ( 100% )
+nickname[ String, minLength=8, maxLength=10 ] <=> nickname[ String ] ( 100% )
+mail[ List, MANDATORY, minLength=1, maxLength=2147483647 ] <=> email[ String, MANDATORY ] ( 64% )
+profileInfos[ DataInfos, MANDATORY ] <=> ? profileInfos.creation[ XMLGregorianCalendar ] <=> ? profileInfos.modification[ XMLGregorianCalendar ] <=> ?
+
+//toHTML... use http://codebeautify.org/htmlviewer/
+<html><body><label style='color:rgb(0, 200, 0);'>id[ String, MANDATORY ] <=> id[ String, MANDATORY ] ( 100% )</label></br><label style='color:rgb(0, 0, 0);'><b>account[ AccountPeople ] <=> ?</b></label></br><div style='margin-left: 5em;'><label style='color:rgb(0, 200, 0);'>login[ String, MANDATORY ] <=> account.login[ String, MANDATORY ] ( 100% )</label></br></div><div style='margin-left: 5em;'><label style='color:rgb(127, 100, 0);'>password[ String ] <=> account.password[ String, MANDATORY ] ( 80% )</label></br></div><div style='margin-left: 5em;'><label style='color:rgb(212, 33, 0);'>isAdmin[ String, MANDATORY, minLength=1, maxLength=1 ] <=> account.login[ String, MANDATORY ] ( 66% )</label></br></div><div style='margin-left: 5em;'><label style='color:rgb(0, 0, 0);'><b>profileInfos[ DataInfos, MANDATORY ] <=> ?</b></label></br><div style='margin-left: 5em;'><label style='color:rgb(0, 0, 0);'>creation[ XMLGregorianCalendar ] <=> ?</label></br></div><div style='margin-left: 5em;'><label style='color:rgb(0, 0, 0);'>modification[ XMLGregorianCalendar ] <=> ?</label></br></div></div><div style='margin-left: 5em;'><label style='color:rgb(0, 0, 0);'><b>facebook[ FacebookInfos, MANDATORY ] <=> ?</b></label></br><div style='margin-left: 5em;'><label style='color:rgb(0, 0, 0);'>compteFacebookName[ String, MANDATORY ] <=> ?</label></br></div><div style='margin-left: 5em;'><label style='color:rgb(0, 0, 0);'>motDePasse[ String, MANDATORY ] <=> ?</label></br></div></div><label style='color:rgb(0, 200, 0);'>firstName[ String, MANDATORY, minLength=0, maxLength=20 ] <=> firstName[ String, MANDATORY, minLength=0, maxLength=120 ] ( 100% )</label></br><label style='color:rgb(0, 200, 0);'>lastName[ String, MANDATORY, minLength=0, maxLength=20 ] <=> lastName[ String, MANDATORY ] ( 100% )</label></br><label style='color:rgb(0, 200, 0);'>nickname[ String, minLength=8, maxLength=10 ] <=> nickname[ String ] ( 100% )</label></br><label style='color:rgb(229, 20, 0);'>mail[ List, MANDATORY, minLength=1, maxLength=2147483647 ] <=> email[ String, MANDATORY ] ( 64% )</label></br><label style='color:rgb(0, 0, 0);'><b>profileInfos[ DataInfos, MANDATORY ] <=> ?</b></label></br><div style='margin-left: 5em;'><label style='color:rgb(0, 0, 0);'>creation[ XMLGregorianCalendar ] <=> ?</label></br></div><div style='margin-left: 5em;'><label style='color:rgb(0, 0, 0);'>modification[ XMLGregorianCalendar ] <=> ?</label></br></div></body></html>
