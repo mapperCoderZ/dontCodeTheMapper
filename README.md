@@ -3,7 +3,7 @@ This program is an utility that writes the java mapping code between 2 types for
 - you do not want anymore to write if (null) then else
 - you want to generate the code that maps basic fields without touching the keyboard
 - you want to keep control on the code
-- you dislike mappers based on configuration files
+- you dislike mappers based on configuration files, return to the basics !
 - we have more interesting stuff to do !
 - you want to code, the code if the truth, you don't need more
 - what about a nice report on the mapping quality in your browser ?
