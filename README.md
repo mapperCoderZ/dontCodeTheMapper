@@ -5,6 +5,7 @@ This program is an utility that writes the java mapping code between 2 types for
 - you want to keep control on the code
 - you dislike mappers based on configuration files
 - we have more interesting stuff to do !
+- you want to code, the code if the truth, you don't need more
 - what about a nice report on the mapping quality in your browser ?
 
 # You should know
