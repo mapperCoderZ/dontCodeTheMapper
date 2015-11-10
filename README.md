@@ -66,3 +66,6 @@ cible.setFirstName( formatString ( source.getFirstName(), 0, 20 ));
 * Always check the generated mapping code before committing :)
 
 
+# Limits
+* Doesn't generate the mapping code for collections (instead it writes a comment "//a.setList( new List());"), not yet !
+
