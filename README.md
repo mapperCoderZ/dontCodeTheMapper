@@ -57,8 +57,8 @@ cible.setFirstName( formatString ( source.getFirstName(), 0, 20 ));
 * take a look at the generated comments
 * run the generated HTML code in an HTML runner like http://codebeautify.org/htmlviewer/# and see the result. It represents a tree of the B type, with fields names, types and metadatas, and the mapping computed from the A type with a mapping quality percentage. The color is related to this percentage:
 * Green means the mapping code is quite good
-* Red means that the mapping code is to check
-* black means no mapping has been done
+* Red means that the mapping code is to checked
+* Black means no mapping has been done
 
 # More tips
 * Have a look at the L class, you can play with the INDEX_RESSEMBLANCE variable to get a totally different mapping code
