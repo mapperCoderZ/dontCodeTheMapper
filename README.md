@@ -24,7 +24,7 @@ According to your data model, this little program writes 50% of the mapping code
 ```java
 System.out.println(new Generator().mapAToB(A, B, true, true, true));
 ```
-5. Get the result in console:
+Get the result in console:
 ```java
 //creates...
 AccountPeople account1Dest = new AccountPeople();
