@@ -20,11 +20,11 @@ According to your data model, this little program writes 50% of the mapping code
 1. Add the generator to the classpath
 2. Add the 2 JAXB annotated types (A && B) and jaxb-api to the classpath
 3. Ensure your 2 types have JAXB annotations XmlElement, XmlType and Size (optional). For size you can use the krasa-jaxb-tools generator plugin !
-3. Call: 
+4. Call: 
 ```java
 System.out.println(new Generator().mapAToB(A, B, true, true, true));
 ```
-4. Get the result in console:
+5. Get the result in console:
 ```java
 //creates...
 AccountPeople account1Dest = new AccountPeople();
