@@ -422,7 +422,7 @@ public class L {
 				str += ll.toJavaMapping(lb);
 			}
 			if (!required) {
-				str += "}\n";
+				str += "} else {\n throw new DontLetMeGoException ();//TODO: remove this else if not necessary\n}\n";
 			}
 
 		}

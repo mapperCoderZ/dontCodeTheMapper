@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
 
 /**
@@ -149,9 +150,8 @@ public class Generator {
 		Field[] fields = a.getDeclaredFields();
 		for (Field field : fields) {
 			if (field.getName() != "serialVersionUID") {
-				boolean isXmlType = isXmlType(field.getType().getDeclaredAnnotations());
 				boolean r = isRequired(field.getDeclaredAnnotations());
-				if (isXmlType) {
+				if (canInterateOnIt(field.getType())) {
 					// ce champ est d'un des types a recuperer!
 					L l1 = new L(field.getName(), r, field.getType(), null, null, getNomInstance(field.getName(), nom));
 					List<L> l2 = new ArrayList<L>();
@@ -194,13 +194,27 @@ public class Generator {
 		return null;
 	}
 
-	public boolean isXmlType(Annotation[] annot) {
-		for (Annotation d : annot) {
+	/**
+	 * Returns a boolean telling if a is iterable.
+	 * 
+	 * @param a
+	 *            Type
+	 * @return what you expect or not
+	 */
+	public boolean canInterateOnIt(Class a) {
+		boolean isXmlType = false;
+		for (Annotation d : a.getDeclaredAnnotations()) {
 			if (d.annotationType().getName().equals(XmlType.class.getName())) {
-				return true;
+				isXmlType = true;
 			}
 		}
-		return false;
+		boolean isXmlEnum = false;
+		for (Annotation d : a.getDeclaredAnnotations()) {
+			if (d.annotationType().getName().equals(XmlEnum.class.getName())) {
+				isXmlEnum = true;
+			}
+		}
+		return isXmlType && !isXmlEnum;
 	}
 
 	/**
