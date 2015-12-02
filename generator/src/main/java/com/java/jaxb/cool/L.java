@@ -300,8 +300,8 @@ public class L {
 		}
 		if (i > INDEX_RESSEMBLANCE) {
 			mapsTo = lb;
-			if (i > 1) {
-				indice = 1.0;
+			if (i >= 1) {
+				indice = 0.99;
 			} else {
 				indice = i;
 			}
