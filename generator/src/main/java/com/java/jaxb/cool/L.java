@@ -365,7 +365,7 @@ public class L {
 		field += mapsTo.nom.substring(0, 1).toUpperCase() + mapsTo.nom.substring(1) + "()";
 
 		String str = field;
-		if (type == String.class && mapsTo.type == type) {
+		if (type == String.class && mapsTo.type == type && (min != null || max != null)) {
 			int minL = 0;
 			int maxL = 0;
 			int minLL = 0;
