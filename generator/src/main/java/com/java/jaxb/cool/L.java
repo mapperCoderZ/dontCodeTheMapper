@@ -156,7 +156,7 @@ public class L {
 		if (ll.min != null || ll.max != null) {
 			if (ll.min == null) {
 				str += ", maxLength=" + ll.max;
-			} else if (max == null) {
+			} else if (ll.max == null) {
 				str += ", minLength=" + ll.min;
 			}
 			if (ll.min != null && ll.max != null) {
