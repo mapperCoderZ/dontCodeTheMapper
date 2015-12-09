@@ -6,7 +6,7 @@ import junit.framework.TestCase;
 /**
  * Launch testMake() to test the generator.
  * 
- * @author GillesOFraisse
+ * @author mapperCoderZ
  *
  */
 public class TestGenerator extends TestCase {

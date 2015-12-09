@@ -41,7 +41,7 @@ import javax.xml.bind.annotation.XmlType;
  * XmlType (javax), field name "serialVersionUID" is ignored...
  * </p>
  * 
- * @author GillesOFraisse
+ * @author mapperCoderZ
  */
 public class Generator {
 	/* come back later */

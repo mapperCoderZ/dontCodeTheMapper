@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * A "L" is a representation of a field in a type. With a lot of tools.
  * 
- * @author GillesOFraisse
+ * @author mapperCoderZ
  */
 public class L {
 	/*
