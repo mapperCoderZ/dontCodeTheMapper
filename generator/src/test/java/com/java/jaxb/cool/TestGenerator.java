@@ -15,8 +15,8 @@ public class TestGenerator extends TestCase {
 		// A and B types must be in your classpath and have basic JAXB
 		// annotations (XMLType, Size ...)
 		// see the result in console
-		System.out.println(g.mapAToB(com.developpez.hugo.modela.Profile.class, com.developpez.hugo.modelb.Profile.class,
-				true, true, true));
+		//System.out.println(g.mapAToB(com.developpez.hugo.modela.Profile.class, com.developpez.hugo.modelb.Profile.class,
+		//		true, true, true));
 	}
 
 	/**
