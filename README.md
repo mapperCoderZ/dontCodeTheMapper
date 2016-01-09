@@ -9,7 +9,7 @@ This program is an utility that writes the java mapping code between 2 types for
 - what about a nice report on the mapping quality in your browser ?
 
 # You should know
-I've made this program in one day, it has been made with the StringSimilarity.java class found on the web. This code has been tested with Java 6 && 7, it's not optimized and not respectful towards some basic Java good practices, but it does the job. And I hope it will help !
+This program has been made with the StringSimilarity.java class found on the web. This code has been tested with Java 6 && 7, it's not optimized and not respectful towards some basic Java good practices, but it does the job. And I hope it will help !
 
 # Why ?
 I use to map JAXB annotated types one to anothers, all days, at work. We spend 90% of our time writing java mappers for our clients to integrate new web services based on XML. Since we use CXF and JAXB code generation from XSD, it's possible to automate the writing of 50% of our mappers, at least for fields that are similar by their name/type/attributes...
@@ -22,7 +22,7 @@ According to your data model, this little program writes 50% of the mapping code
 3. Ensure your 2 types have JAXB annotations XmlElement, XmlType and Size (optional). For size you can use the krasa-jaxb-tools generator plugin !
 4. Call: 
 ```java
-System.out.println(new Generator().mapAToB(A, B, true, true, true));
+System.out.println(new Generator().mapAToB(A, B, true, true, true, true));
 ```
 Get the result in console:
 ```java
@@ -67,5 +67,5 @@ cible.setFirstName( formatString ( source.getFirstName(), 0, 20 ));
 
 
 # Limits
-* Doesn't generate the mapping code for collections (instead it writes a comment "//a.setList( new List());"), not yet !
+* Doesn't generate good mapping code for collections!
 
