@@ -2,6 +2,7 @@ package com.java.jaxb.cool;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,8 +38,8 @@ import javax.xml.bind.annotation.XmlType;
  * please be cool! KISS.
  * </p>
  * <p>
- * Somme limits: does not manage Collections and complex types which are not
- * XmlType (javax), field name "serialVersionUID" is ignored...
+ * Somme limits: does not manage well Collections and complex types which are
+ * not XmlType (javax), field name "serialVersionUID" is ignored...
  * </p>
  * 
  * @author mapperCoderZ
@@ -63,10 +64,11 @@ public class Generator {
 	 *            type
 	 * @param generateToHTML
 	 *            true to generate HTML nice report with a lot of colors
+	 * @param generateCsv
 	 * @return what you expect
 	 */
 	public String mapAToB(Class a, Class b, boolean generateUnsetFields, boolean generateToString,
-			boolean generateToHTML) {
+			boolean generateToHTML, boolean generateCsv) {
 		String res = "";
 		List<L> la = new ArrayList<L>();
 		List<L> lb = new ArrayList<L>();
@@ -89,6 +91,16 @@ public class Generator {
 			res += "\n//toString...\n";
 			for (L l : lb) {
 				res += l.toString();
+			}
+		}
+		if (generateCsv) {
+			res += "\n\n//toCSV...\n" + a.getSimpleName() + ";" + b.getSimpleName() + ";Regle gestion;Taux matching\n";
+			for (L l : lb) {
+				res += l.toCsv("");
+			}
+			res += "\n\n\n\n\n\nDescriptif complet de " + a.getSimpleName() + "\n";
+			for (L l : la) {
+				res += l.toCsv("").replace(";", "").replace("?", "");
 			}
 		}
 		if (generateToHTML) {
@@ -151,13 +163,17 @@ public class Generator {
 		for (Field field : fields) {
 			if (field.getName() != "serialVersionUID") {
 				boolean r = isRequired(field.getDeclaredAnnotations());
-				if (canInterateOnIt(field.getType())) {
+				Class iterableType = canInterateOnIt(field);
+				if (iterableType != null) {
 					// ce champ est d'un des types a recuperer!
-					L l1 = new L(field.getName(), r, field.getType(), null, null, getNomInstance(field.getName(), nom));
+					L l1 = new L(field.getName(), r, iterableType, null, null, getNomInstance(field.getName(), nom));
+					if (field.getType() == List.class) {
+						l1.isList = true;
+					}
 					List<L> l2 = new ArrayList<L>();
 					l1.l = l2;
 					l.add(l1);
-					makeL(l2, field.getType(), nom);
+					makeL(l2, iterableType, nom);
 					for (L l22 : l2) {
 						l22.parent = l1;
 					}
@@ -197,24 +213,30 @@ public class Generator {
 	/**
 	 * Returns a boolean telling if a is iterable.
 	 * 
-	 * @param a
-	 *            Type
-	 * @return what you expect or not
+	 * @param field
+	 *            champ
+	 * @return class of iterable type or null if this field is not iterable
 	 */
-	public boolean canInterateOnIt(Class a) {
-		boolean isXmlType = false;
-		for (Annotation d : a.getDeclaredAnnotations()) {
-			if (d.annotationType().getName().equals(XmlType.class.getName())) {
-				isXmlType = true;
-			}
-		}
+	public Class canInterateOnIt(Field field) {
+		Class res = null;
 		boolean isXmlEnum = false;
-		for (Annotation d : a.getDeclaredAnnotations()) {
+		for (Annotation d : field.getType().getDeclaredAnnotations()) {
 			if (d.annotationType().getName().equals(XmlEnum.class.getName())) {
 				isXmlEnum = true;
 			}
 		}
-		return isXmlType && !isXmlEnum;
+		if (!isXmlEnum) {
+			if (field.getType() == List.class) {
+				res = (Class) (((ParameterizedType) field.getGenericType()).getActualTypeArguments()[0]);
+			} else {
+				for (Annotation d : field.getType().getDeclaredAnnotations()) {
+					if (d.annotationType().getName().equals(XmlType.class.getName())) {
+						res = field.getType();
+					}
+				}
+			}
+		}
+		return res;
 	}
 
 	/**

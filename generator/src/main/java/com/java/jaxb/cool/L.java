@@ -47,6 +47,7 @@ public class L {
 	public L mapsTo = null;
 	/* represents the "quality" of the generated code, between 0 and 1 */
 	public Double indice;
+	public boolean isList = false;
 
 	/**
 	 * Constructor.
@@ -135,6 +136,60 @@ public class L {
 		return str;
 	}
 
+	public String toCsv(String startLine) {
+		String str = "";
+		Integer indiceInt = 0;
+		if (indice != null) {
+			indiceInt = (int) (indice * 100);
+		}
+
+		if (mapsTo != null) {
+			str += getToStringMetadata(mapsTo, true);
+		} else {
+			str += "?";
+		}
+		str += ";" + startLine + getToStringMetadata(this, false);
+		str += ";";
+		if (mapsTo != null) {
+			if (type == String.class && mapsTo.type == type && (min != null || max != null)) {
+				int minL = 0;
+				int maxL = 0;
+				int minLL = 0;
+				int maxLL = 0;
+				if (min != null) {
+					minL = min.intValue();
+				}
+				if (mapsTo.min != null) {
+					minLL = mapsTo.min.intValue();
+				}
+				if (max != null) {
+					maxL = max.intValue();
+				}
+				if (mapsTo.max != null) {
+					maxLL = mapsTo.max.intValue();
+				}
+				if (minLL < minL || maxLL > maxL) {
+					str += "format length, ";
+				}
+			}
+			if (required && !mapsTo.required) {
+				str += "test null else, ";
+			}
+			if (type != String.class && type != Boolean.class && type != mapsTo.type) {
+				str += "casting ";
+			}
+			str += ";=\"" + indiceInt + "%\"";
+		}
+		str += "\n";
+		if (l != null) {
+			for (L ll : l) {
+				str += ll.toCsv(startLine + "    ");
+			}
+		}
+		return str;
+
+	}
+
 	/**
 	 * Get a part of a L as a string.
 	 * 
@@ -149,18 +204,25 @@ public class L {
 		if (ll.parent != null && showParent) {
 			str += ll.parent.nom + ".";
 		}
-		str += ll.nom + "[ " + ll.type.getSimpleName();
+		str += ll.nom + " [ ";
+		if (ll.isList) {
+			str += "List[";
+		}
+		str += ll.type.getSimpleName();
+		if (ll.isList) {
+			str += "]";
+		}
 		if (ll.required) {
-			str += ", MANDATORY";
+			str += ", NOTNULL";
 		}
 		if (ll.min != null || ll.max != null) {
 			if (ll.min == null) {
-				str += ", maxLength=" + ll.max;
+				str += ", max=" + ll.max;
 			} else if (ll.max == null) {
-				str += ", minLength=" + ll.min;
+				str += ", min=" + ll.min;
 			}
 			if (ll.min != null && ll.max != null) {
-				str += ", minLength=" + ll.min + ", maxLength=" + ll.max;
+				str += ", min=" + ll.min + ", max=" + ll.max;
 			}
 		}
 		str += " ]";
