@@ -29,22 +29,23 @@ public class TestGenerator extends TestCase {
 	 * @return null or string
 	 */
 	public String formatString(String value, Integer minLength, Integer maxLength) {
-		if (value == null) {
+		if ( value == null ) {
 			return null;
 		}
 		int max = value.length();
-		if (maxLength != null) {
+		if ( maxLength != null ) {
 			max = maxLength.intValue();
 		}
 		int min = 0;
-		if (minLength != null) {
+		if ( minLength != null ) {
 			min = minLength.intValue();
 		}
 		String res;
-		if (min > 0) {
-			res = String.format("%1$-" + min + "s", value.substring(0, Math.min(value.length(), max - 1)));
-		} else {
-			res = value.substring(0, Math.min(value.length(), max));
+		if ( min > 0 ) {
+			res = String.format( "%1$-" + min + "s", value.substring( 0, Math.min( value.length(), max ) ) );
+		}
+		else {
+			res = value.substring( 0, Math.min( value.length(), max ) );
 		}
 		return res;
 	}
