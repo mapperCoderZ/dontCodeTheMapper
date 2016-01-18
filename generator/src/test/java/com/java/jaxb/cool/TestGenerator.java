@@ -51,15 +51,15 @@ public class TestGenerator extends TestCase {
 	}
 
 	public void testFormatString() {
-		Assert.assertEquals( Conversion.formatString( "test", 9, 15 ), "test     " );
-		Assert.assertEquals( Conversion.formatString( "", 9, 15 ), "         " );
-		Assert.assertEquals( Conversion.formatString( "test grandeur nature", 9, 15 ), "test grandeur n" );
-		Assert.assertEquals( Conversion.formatString( "test", 0, 1 ), "t" );
-		Assert.assertEquals( Conversion.formatString( "test", 0, 2 ), "te" );
-		Assert.assertEquals( Conversion.formatString( "20000101", 8, 8 ), "20000101" );
-		Assert.assertEquals( Conversion.formatString( " ", 2, 10 ), "  " );
-		Assert.assertEquals( Conversion.formatString( " ", 2, null ), "  " );
-		Assert.assertEquals( Conversion.formatString( "azerty", null, 5 ), "azert" );
+		Assert.assertEquals( formatString( "test", 9, 15 ), "test     " );
+		Assert.assertEquals( formatString( "", 9, 15 ), "         " );
+		Assert.assertEquals( formatString( "test grandeur nature", 9, 15 ), "test grandeur n" );
+		Assert.assertEquals( formatString( "test", 0, 1 ), "t" );
+		Assert.assertEquals( formatString( "test", 0, 2 ), "te" );
+		Assert.assertEquals( formatString( "20000101", 8, 8 ), "20000101" );
+		Assert.assertEquals( formatString( " ", 2, 10 ), "  " );
+		Assert.assertEquals( formatString( " ", 2, null ), "  " );
+		Assert.assertEquals( formatString( "azerty", null, 5 ), "azert" );
 	}
 
 }
